@@ -19,7 +19,7 @@ import org.xwalk.core.XWalkCookieManager;
 import android.view.View;
 import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
-import android.webkit.ValueCallback
+import android.webkit.ValueCallback;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
