@@ -22,7 +22,8 @@ InAppBrowserXwalk.prototype = {
     hide: function () {
         cordova.exec(null, null, "InAppBrowserXwalk", "hide", []);
     },
-    executeScript: function(injectDetails) {
+    executeScript: function(injectDetails, func) {
+        callbacks['jsCallback'] = func;
         cordova.exec(null, null, "InAppBrowserXwalk", "injectScriptCode", [injectDetails]);
     }
 }
