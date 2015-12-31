@@ -29,10 +29,10 @@ InAppBrowserXwalk.prototype = {
 
 var callback = function(event) {
     if (event.type === "loadstart" && callbacks['loadstart'] !== undefined) {
-        callbacks['loadstart'](event.url);
+        callbacks['loadstart'](event);
     }
     if (event.type === "loadstop" && callbacks['loadstop'] !== undefined) {
-        callbacks['loadstop'](event.url);
+        callbacks['loadstop'](event);
     }
     if (event.type === "exit" && callbacks['exit'] !== undefined) {
         callbacks['exit']();
