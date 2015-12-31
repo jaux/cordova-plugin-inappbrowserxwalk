@@ -53,6 +53,10 @@ public class InAppBrowserXwalk extends CordovaPlugin {
             this.hideBrowser();
         }
 
+        if (action.equals("injectScriptCode")) {
+            this.injectJS(data.getString(0));
+        }
+
         return true;
     }
 
@@ -205,6 +209,28 @@ public class InAppBrowserXwalk extends CordovaPlugin {
                     result.setKeepCallback(true);
                     callbackContext.sendPluginResult(result);
                 } catch (JSONException ex) {}
+            }
+        });
+    }
+
+    public void injectJS(String source) {
+        final String finalScriptToInject = source;
+        this.cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                xWalkWebView.evaluateJavascript(finalScriptToInject, new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String scriptResult) {
+                        try {
+                            JSONObject obj = new JSONObject();
+                            obj.put("type", "jsCallback");
+                            obj.put("result", scriptResult);
+                            PluginResult result = new PluginResult(PluginResult.Status.OK, obj);
+                            result.setKeepCallback(true);
+                            callbackContext.sendPluginResult(result);
+                        } catch (JSONException ex) {}
+                    }
+                });
             }
         });
     }
